@@ -1,4 +1,11 @@
 <?php
+session_start();
+
+if (isset($_SESSION['flash_message'])) {
+    echo '<p>' . htmlspecialchars($_SESSION['flash_message']) . '</p>';
+    unset($_SESSION['flash_message']); // clear after showing once
+}
+
 include 'head.php';
 include 'header.php';
 ?>

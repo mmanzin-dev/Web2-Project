@@ -67,6 +67,16 @@ CREATE TABLE films (
                        CONSTRAINT ck_stockF CHECK (stock >= 0)
 );
 
+CREATE TABLE users (
+                       user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                       email VARCHAR(255) NOT NULL UNIQUE,
+                       password_hash VARCHAR(255) NOT NULL,
+                       first_name VARCHAR(50),
+                       last_name VARCHAR(50),
+                       created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                       updated_at DATETIME NULL DEFAULT NULL
+);
+
 CREATE TABLE customers (
                            customer_id INT NOT NULL AUTO_INCREMENT UNIQUE,
                            first_name VARCHAR(50),
@@ -140,6 +150,13 @@ END$$
 
 CREATE TRIGGER equipment_before_update
     BEFORE UPDATE ON equipment
+    FOR EACH ROW
+BEGIN
+    SET NEW.updated_at = CURRENT_TIMESTAMP;
+END$$
+
+CREATE TRIGGER users_before_update
+    BEFORE UPDATE ON users
     FOR EACH ROW
 BEGIN
     SET NEW.updated_at = CURRENT_TIMESTAMP;
