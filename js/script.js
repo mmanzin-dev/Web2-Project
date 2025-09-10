@@ -16,7 +16,7 @@ function addToCart(name, price) {
         showConfirmButton: false,
         timer: 1000
     }).then(() => {
-        window.location.href = 'cart.html';
+        window.location.href = '/Web2-Project/cart.php';
     });
 }
 
@@ -230,7 +230,7 @@ if (payBtn != null) {
                     confirmButtonColor: '#27ae60',
                 }).then(() => {
                     sessionStorage.removeItem('cart');
-                    window.location.href = 'index.html';
+                    window.location.href = '/Web2-Project/index.php';
                 });
             } else if (result.dismiss === Swal.DismissReason.cancel) {
                 Swal.fire({
