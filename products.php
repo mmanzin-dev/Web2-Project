@@ -20,6 +20,12 @@ if (!$result) {
 ?>
 
 <div class="container">
+    <div style="margin-bottom: 20px; text-align: right;">
+        <a href="index.php" class="btn-view" style="display: inline-block; padding: 8px 14px; border: 1.5px solid white; color: white; background: black; text-decoration: none; cursor: pointer; font-weight: bold; font-size: 1em; transition: all 0.3s;">
+            Nazad na početnu
+        </a>
+    </div>
+
     <main class="products-main">
         <div class="cards-container">
             <?php if ($result->num_rows === 0): ?>
