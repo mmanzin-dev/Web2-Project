@@ -1,18 +1,27 @@
+<?php
+session_start();
+?>
+
 <div class="header">
     <div id="logo-container">
         <a href="index.php"><img src="img/logo.png" id="logo" alt="RetroKamera Logo" /></a>
     </div>
     <div id="icons-container">
-        <a href="login.php" class="header-link"><i class="fa-solid fa-user"></i> PRIJAVA</a>
-        <a href="cart.php" class="header-link"><i class="fa-solid fa-cart-shopping"></i> KOŠARICA</a>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <a href="logout.php" class="header-link"><i class="fa-solid fa-sign-out-alt"></i> Odjava</a>
+        <?php else: ?>
+            <a href="login.php" class="header-link"><i class="fa-solid fa-user"></i> Prijava</a>
+        <?php endif; ?>
     </div>
 </div>
 
 <div class="navbar">
     <ul class="navbar-list">
-        <li class="navbar-item"><a href="cameras.php">Fotoaparati</a></li>
-        <li class="navbar-item"><a href="lens.php">Objektivi</a></li>
-        <li class="navbar-item"><a href="equipment.php">Oprema</a></li>
-        <li class="navbar-item"><a href="film.php">Filmovi</a></li>
+        <li class="navbar-item"><a href="products.php">Svi proizvodi</a></li>
+        <?php if (isset($_SESSION['user_id'])): ?>
+            <li class="navbar-item"><a href="add_product.php">Dodaj proizvod</a></li>
+            <li class="navbar-item"><a href="edit_product.php">Uredi proizvod</a></li>
+            <li class="navbar-item"><a href="delete_product.php">Obriši proizvod</a></li>
+        <?php endif; ?>
     </ul>
 </div>

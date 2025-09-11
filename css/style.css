@@ -144,7 +144,7 @@ Product card design
     font-weight: bold;
 }
 
-.btn-buy {
+.btn-view {
     display: inline-block;
     text-decoration: none;
     background-color: black;
@@ -153,9 +153,10 @@ Product card design
     font-weight: bold;
     border: 3px solid white;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
-.btn-buy:hover {
+.btn-view:hover {
     color: black;
     background-color: white;
     transform: scale(1.1);
@@ -448,7 +449,7 @@ Cart layout design
     margin-top: 20px;
 }
 
-.cart-actions .btn-buy {
+.cart-actions .btn-view {
     font-size: 1.2em;
     padding: 10px 20px;
 }

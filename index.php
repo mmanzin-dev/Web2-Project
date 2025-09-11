@@ -2,39 +2,22 @@
 session_start();
 
 if (isset($_SESSION['flash_message'])) {
-    echo '<p>' . htmlspecialchars($_SESSION['flash_message']) . '</p>';
-    unset($_SESSION['flash_message']); // clear after showing once
+    echo '<p class="flash-message" style="color: white; text-align: center; margin-bottom: 20px;">' . htmlspecialchars($_SESSION['flash_message']) . '</p>';
+    unset($_SESSION['flash_message']);
 }
 
 include 'head.php';
 include 'header.php';
 ?>
 
-<div class="main">
-    <div class="cards-container">
-        <?php
-        $cards = [
-            ['img' => 'img/cameras.png', 'title' => 'Fotoaparati', 'link' => 'cameras.php'],
-            ['img' => 'img/lenses.png', 'title' => 'Objektivi', 'link' => 'lens.php'],
-            ['img' => 'img/placeholder.png', 'title' => 'Oprema', 'link' => 'equipment.php'],
-            ['img' => 'img/film.png', 'title' => 'Film', 'link' => 'film.php'],
-        ];
-
-        foreach ($cards as $card) {
-            echo '<div class="card">';
-            echo '    <img src="' . htmlspecialchars($card['img']) . '" class="card-img" alt="' . htmlspecialchars($card['title']) . '">';
-            echo '    <div class="card-body">';
-            echo '        <h2 class="card-title">' . htmlspecialchars($card['title']) . '</h2>';
-            echo '        <a href="' . htmlspecialchars($card['link']) . '" class="btn-buy">KUPI</a>';
-            echo '    </div>';
-            echo '</div>';
-        }
-        ?>
-    </div>
-
-    <div class="graph">
-        <div class="best-selling">
-            <canvas id="bestsellerChart" width="100" height="300"></canvas>
+<div class="main" style="text-align: center; padding-top: 50px;">
+    <div class="cards-container" style="justify-content: center;">
+        <div class="card" style="max-width: 400px;">
+            <img src="img/cameras.png" alt="Fotoaparati" class="card-img" />
+            <div class="card-body">
+                <h2 class="card-title">Asortiman proizvoda</h2>
+                <a href="products.php" class="btn-view" style="width: 100%; display: inline-block; box-sizing: border-box;">Pogledaj proizvode</a>
+            </div>
         </div>
     </div>
 </div>
