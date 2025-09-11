@@ -20,12 +20,6 @@ if (!$result) {
 ?>
 
 <div class="container">
-    <div style="margin-bottom: 20px; text-align: center;">
-        <a href="index.php" class="btn-view" style="display: inline-block; padding: 10px 20px; border: 3px solid white; color: white; text-decoration: none; cursor: pointer; font-weight: bold; transition: all 0.3s ease;"
-            onmouseover="this.style.backgroundColor='white';this.style.color='black';this.style.transform='scale(1.1)';"
-            onmouseout="this.style.backgroundColor='black';this.style.color='white';this.style.transform='scale(1)';"
-        >Nazad na početnu</a>
-    </div>
 
     <main class="products-main">
         <div class="cards-container">
