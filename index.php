@@ -1,11 +1,5 @@
 <?php
 session_start();
-
-if (isset($_SESSION['flash_message'])) {
-    echo '<p class="flash-message" style="color: white; text-align: center; margin-bottom: 20px;">' . htmlspecialchars($_SESSION['flash_message']) . '</p>';
-    unset($_SESSION['flash_message']);
-}
-
 include 'head.php';
 include 'header.php';
 ?>
