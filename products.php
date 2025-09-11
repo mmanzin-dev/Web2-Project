@@ -20,7 +20,6 @@ if (!$result) {
 ?>
 
 <div class="container">
-
     <main class="products-main">
         <div class="cards-container">
             <?php if ($result->num_rows === 0): ?>
