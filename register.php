@@ -19,7 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (empty($first_name) || empty($last_name)) {
         $error = 'Ime i prezime su obavezni.';
     } else {
-        // Check if email exists
         $stmt = $conn->prepare("SELECT user_id FROM users WHERE email = ?");
         $stmt->bind_param('s', $email);
         $stmt->execute();
@@ -28,15 +27,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ($stmt->num_rows > 0) {
             $error = 'Email već postoji.';
         } else {
-            // Insert user (plain text password—consider hashing for production)
             $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
             $stmt->bind_param('ssss', $first_name, $last_name, $email, $password);
 
             if ($stmt->execute()) {
                 $success = 'Uspješno ste se registrirali. Možete se prijaviti.';
-                // Optionally redirect here:
-                // header("Location: login.php");
-                // exit();
             } else {
                 $error = 'Greška prilikom registracije. Pokušajte ponovno.';
             }

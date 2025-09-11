@@ -4,7 +4,6 @@ require 'connect.php';
 require 'head.php';
 require 'header.php';
 
-// Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -12,7 +11,6 @@ if (!isset($_SESSION['user_id'])) {
 
 $message = "";
 
-// Handle deletion
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_product'])) {
     $id = intval($_POST['product_id']);
     if ($id > 0) {
@@ -27,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_product'])) {
     }
 }
 
-// Fetch products and categories
 $products = $conn->query("SELECT * FROM products");
 $categories = [];
 $res = $conn->query("SELECT category_id, name FROM categories");

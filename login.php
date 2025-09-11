@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($res && $res->num_rows === 1) {
         $row = $res->fetch_assoc();
-        if ($row['password'] === $password) {  // plain text password, consider hashing!
+        if ($row['password'] === $password) {
             $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['username'] = $row['email'];
             header("Location: index.php");

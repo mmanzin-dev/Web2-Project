@@ -9,6 +9,8 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
+$message = "";
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_product'])) {
     $id = intval($_POST['product_id']);
     $name = trim($_POST['name'] ?? '');
@@ -19,11 +21,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_product'])) {
     if ($name !== '' && $price > 0 && $category_id > 0) {
         $stmt = $conn->prepare("UPDATE products SET name = ?, description = ?, price = ?, category_id = ? WHERE product_id = ?");
         $stmt->bind_param("ssdii", $name, $description, $price, $category_id, $id);
-        $stmt->execute();
+        if ($stmt->execute()) {
+            $message = "Proizvod je uspješno azuriran!";
+        } else {
+            $message = "Greška prilikom ažuriranja proizvoda: " . $stmt->error;
+        }
         $stmt->close();
+    } else {
+        $message = "Molimo unesite ispravne podatke.";
     }
-    header("Location: edit_product.php");
-    exit();
 }
 
 $products = $conn->query("SELECT * FROM products");
@@ -59,6 +65,25 @@ while ($row = $res->fetch_assoc()) {
         border-bottom: 3px solid white;
         padding-bottom: 10px;
         margin-bottom: 25px;
+    }
+    .message {
+        font-weight: bold;
+        border-left: 5px solid;
+        padding: 10px;
+        margin-bottom: 20px;
+        max-width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .message.success {
+        border-color: #2ecc71;
+        background-color: #113311;
+        color: #aaffaa;
+    }
+    .message.error {
+        border-color: #e74c3c;
+        background-color: #331111;
+        color: #ffaaaa;
     }
     table {
         width: 100%;
@@ -106,12 +131,19 @@ while ($row = $res->fetch_assoc()) {
         -moz-appearance: textfield;
         -webkit-appearance: none;
         appearance: none;
-}
+    }
 </style>
 </head>
 <body>
 <div class="container">
 <h2>Uredi proizvode</h2>
+
+<?php if (!empty($message)): ?>
+    <div class="message <?= strpos($message, 'uspješno') !== false ? 'success' : 'error' ?>">
+        <?= htmlspecialchars($message) ?>
+    </div>
+<?php endif; ?>
+
 <table>
     <thead>
         <tr>
@@ -132,7 +164,7 @@ while ($row = $res->fetch_assoc()) {
                         <input type="hidden" name="product_id" value="<?= $p['product_id'] ?>">
                     </td>
                     <td><input type="text" name="name" required value="<?= htmlspecialchars($p['name']) ?>" /></td>
-                    <td><textarea name="description" required><?= htmlspecialchars($p['description']) ?></textarea></td>
+                    <td><textarea name="description"><?= htmlspecialchars($p['description']) ?></textarea></td>
                     <td><input type="text" step="0.01" min="0" name="price" required value="<?= htmlspecialchars($p['price']) ?>" /></td>
                     <td>
                         <select name="category" required>

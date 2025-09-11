@@ -1,6 +1,6 @@
 <?php
 require 'head.php';
-require 'connect.php';  // Your DB connection
+require 'connect.php';
 
 $sql = "
     SELECT 

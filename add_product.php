@@ -11,14 +11,12 @@ if (!isset($_SESSION['user_id'])) {
 
 $message = "";
 
-// Load categories
 $categories = [];
 $res = $conn->query("SELECT category_id, name FROM categories");
 while ($row = $res->fetch_assoc()) {
     $categories[$row['category_id']] = $row['name'];
 }
 
-// Handle adding new product
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
     $name = trim($_POST['name'] ?? '');
     $price = floatval($_POST['price'] ?? 0);
@@ -39,7 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
     }
 }
 
-// Handle editing a product
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_product'])) {
     $id = intval($_POST['product_id']);
     $name = trim($_POST['edit_name'] ?? '');
@@ -58,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_product'])) {
     }
 }
 
-// Fetch products for edit table
 $products = $conn->query("SELECT * FROM products");
 ?>
 

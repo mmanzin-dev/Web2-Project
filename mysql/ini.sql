@@ -1,15 +1,12 @@
--- Drop existing tables if they exist
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS users;
 DROP TABLE IF EXISTS categories;
 
--- Create categories table
 CREATE TABLE categories (
     category_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     name VARCHAR(50) NOT NULL UNIQUE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
 
--- Create users table
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
@@ -20,7 +17,6 @@ CREATE TABLE users (
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
 
--- Create products table
 CREATE TABLE products (
     product_id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     category_id INT NOT NULL,
@@ -33,7 +29,6 @@ CREATE TABLE products (
         ON DELETE RESTRICT ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_croatian_ci;
 
--- Indexes for products and users can be added as needed, e.g.:
 CREATE INDEX idx_products_category ON products(category_id);
 
 INSERT INTO categories (name) VALUES
