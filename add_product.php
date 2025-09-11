@@ -36,26 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_product'])) {
         $stmt->close();
     }
 }
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['edit_product'])) {
-    $id = intval($_POST['product_id']);
-    $name = trim($_POST['edit_name'] ?? '');
-    $price = floatval($_POST['edit_price'] ?? 0);
-    $category_id = intval($_POST['edit_category'] ?? 0);
-    $description = trim($_POST['edit_description'] ?? '');
-
-    if ($name !== '' && $price > 0 && isset($categories[$category_id])) {
-        $stmt = $conn->prepare("UPDATE products SET name = ?, description = ?, price = ?, category_id = ? WHERE product_id = ?");
-        $stmt->bind_param("ssdii", $name, $description, $price, $category_id, $id);
-        $stmt->execute();
-        $stmt->close();
-        $message = "Proizvod je uspješno uređen!";
-    } else {
-        $message = "Molimo unesite ispravne podatke za uređivanje.";
-    }
-}
-
-$products = $conn->query("SELECT * FROM products");
 ?>
 
 <style>
@@ -140,7 +120,7 @@ $products = $conn->query("SELECT * FROM products");
 </style>
 
 <div class="container">
-    <h2>Uredi proizvode</h2>
+    <h2>Dodaj proizvode</h2>
 
     <?php if (!empty($message)): ?>
         <div class="message <?= strpos($message, 'uspješno') !== false ? 'success' : 'error' ?>">
@@ -148,7 +128,6 @@ $products = $conn->query("SELECT * FROM products");
         </div>
     <?php endif; ?>
 
-    <!-- Add New Product -->
     <form method="POST" action="">
         <table>
             <thead>
