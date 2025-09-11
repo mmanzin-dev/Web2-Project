@@ -4,7 +4,7 @@ require 'connect.php';  // Your DB connection
 
 $sql = "
     SELECT 
-        p.product_id, p.name, p.image_url, p.price, c.name AS category_name
+        p.product_id, p.name, p.price, c.name AS category_name
     FROM 
         products p
     JOIN 
@@ -35,13 +35,20 @@ if (!$result) {
                 </p>
             <?php else: ?>
                 <?php while ($product = $result->fetch_assoc()): ?>
-                    <div class="card">
-                        <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" class="card-img" />
-                        <div class="card-body">
-                            <div class="card-type"><?= htmlspecialchars($product['category_name']) ?></div>
-                            <div class="card-title"><?= htmlspecialchars($product['name']) ?></div>
-                            <div class="card-price"><?= number_format($product['price'], 2) ?>€</div>
-                            <a href="#" class="btn-view">DODAJ U KOŠARICU</a>
+                    <div class="card" style="border: 3px solid white; background: black; padding: 15px; margin-bottom: 20px; color: white;">
+                        <div class="card-body" style="font-family: 'Roboto', sans-serif;">
+                            <div class="card-type" style="font-size: 0.9em; margin-bottom: 5px; color: #aaa;">
+                                <?= htmlspecialchars($product['category_name']) ?>
+                            </div>
+                            <div class="card-title" style="font-weight: bold; font-size: 1.2em; margin-bottom: 8px;">
+                                <?= htmlspecialchars($product['name']) ?>
+                            </div>
+                            <div class="card-price" style="font-size: 1em; margin-bottom: 10px;">
+                                <?= number_format($product['price'], 2) ?>€
+                            </div>
+                            <a href="#" class="btn-view" style="color: white; border: 3px solid white; padding: 8px 12px; text-decoration: none; font-weight: bold; display: inline-block; transition: all 0.3s;">
+                                DODAJ U KOŠARICU
+                            </a>
                         </div>
                     </div>
                 <?php endwhile; ?>
